@@ -1,25 +1,40 @@
 package com.example.financetracker.transaction;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Transaction {
+    @Id
+    @SequenceGenerator(
+            name = "transaction_sequence",
+            sequenceName = "transaction_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "transaction_sequence"
+    )
     private Integer transactionId;
+
     private String merchant;
-    private Integer amount;
+    private Double amount;
     private LocalDate date;
 
     public Transaction(){
 
     }
 
-    public Transaction(Integer transactionId, String merchant, Integer amount, LocalDate date) {
+    public Transaction(Integer transactionId, String merchant, Double amount, LocalDate date) {
         this.transactionId = transactionId;
         this.merchant = merchant;
         this.amount = amount;
         this.date = date;
     }
 
-    public Transaction(String merchant, Integer amount, LocalDate date) {
+    public Transaction(String merchant, Double amount, LocalDate date) {
         this.merchant = merchant;
         this.amount = amount;
         this.date = date;
@@ -33,11 +48,11 @@ public class Transaction {
         this.merchant = merchant;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

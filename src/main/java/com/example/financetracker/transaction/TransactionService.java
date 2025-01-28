@@ -1,5 +1,6 @@
 package com.example.financetracker.transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,16 +11,15 @@ import java.util.List;
 @Service //sends transactionService to controller as a "bean"
 public class TransactionService {
 
+    private final TransactionRepository transactionRepository;
+
+    @Autowired
+    public TransactionService(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
     @GetMapping
     public List<Transaction> getTransactions() {
-        return List.of(
-                new Transaction(
-                        1,
-                        "costco",
-                        1000,
-                        LocalDate.of(2025, Month.JANUARY, 1)
-                )
-        );
-
+        return transactionRepository.findAll();
     }
 }
