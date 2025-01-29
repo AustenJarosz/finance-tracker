@@ -1,7 +1,6 @@
 package com.example.financetracker.transaction;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -18,13 +17,11 @@ public class Transaction {
             generator = "transaction_sequence"
     )
     private Integer transactionId;
-
     private String merchant;
     private Double amount;
     private LocalDate date;
 
     public Transaction(){
-
     }
 
     public Transaction(Integer transactionId, String merchant, Double amount, LocalDate date) {
